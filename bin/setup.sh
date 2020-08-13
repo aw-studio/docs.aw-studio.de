@@ -1,0 +1,1 @@
+git clone --single-branch --branch "master" git@github.com:aw-studio/docs.git "resources/docs"

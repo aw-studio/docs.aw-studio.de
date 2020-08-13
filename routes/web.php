@@ -1,18 +1,25 @@
 <?php
 
+use App\Fjuse;
+use App\Http\Controllers\DocsController;
+use App\Http\Controllers\LoginController;
+use App\Models\Repository;
+use App\Models\User;
+use App\Services\GitLab\GitLabApi;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+if (! defined('DEFAULT_PAGE')) {
+    define('DEFAULT_PAGE', 'readme');
+}
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', fn () => view('welcome'));
+
+// Docs
+
+Route::get('docs/{page?}/{sub_page?}', [DocsController::class, 'show'])->name('docs');
+
+// Auth
+
+Route::get('logout', [LoginController::class, 'logout']);
+Route::get('login/github', [LoginController::class, 'redirectToGithubProvider']);
+Route::get('login/github/callback', [LoginController::class, 'handleGithubProviderCallback']);
