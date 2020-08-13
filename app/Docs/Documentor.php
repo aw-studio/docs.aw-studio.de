@@ -65,8 +65,11 @@ class Documentor
 
         foreach ($matches[0] as $match) {
             $page = str_replace('.md', '', $match);
-            $content = str_replace($match, trim("/docs/$page"), $content);
+            
+            $content = str_replace($match, str_replace('//', '/', "/docs/$page"), $content);
         }
+
+        
 
         return $content;
     }
