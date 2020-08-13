@@ -24,6 +24,8 @@ Die variablen können auf [github.com/settings/applications/new](https://github.
 
 ## Update
 
+Der neuste Stand der Dokumentation wird mit dem folgenden befehl geladen:
+
 ```shell
 cd resources/docs && git pull && cd ../..
 ```
