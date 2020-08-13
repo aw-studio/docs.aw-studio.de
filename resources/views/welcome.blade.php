@@ -13,8 +13,8 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
+                color: #000;
+                font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -74,6 +74,12 @@
                         Login
                     </a>
                 @endauth
+            </div>
+            <div class="content">
+                <div class="title m-b-md">
+                    //* Alle Wetter Docs
+                </div>
+
             </div>
         </div>
     </body>
