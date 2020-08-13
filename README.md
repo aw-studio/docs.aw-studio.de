@@ -6,7 +6,7 @@
 git clone https://github.com/aw-studio/docs.git resources/docs
 ```
 
-The `.env` needs:
+Die `.env` benötigt:
 
 -   `GITHUB_CLIENT_ID`
 -   `GITHUB_CLIENT_SECRET`
