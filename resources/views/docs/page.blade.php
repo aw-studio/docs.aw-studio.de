@@ -20,15 +20,9 @@
             <section class="p-12" style="900px">
                 <div class="content w-3/4">
 
-                {!! $content !!}
+                    {!! $content !!}
 
                 </div>
-                <div class="controls">
-                    <select class="w-100">
-                        <option value="2.4">2.4</option>
-                    </select>
-                </div>
-                
             </section>
             
         </div>
