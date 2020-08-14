@@ -73,8 +73,7 @@ class DocsController
 
         if (! $version) {
             if (! $branch = $project->branches->where('default', true)->first()) {
-                return ' No default branch';
-                abort(404, 'No default branch');
+                abort(404);
             }
 
             $version = $branch->name;
@@ -85,13 +84,11 @@ class DocsController
         }
 
         if (! $this->docs->exists($project->name, $version, $page)) {
-            dd($project->name, $version, $page);
-            abort(404, 'dosent exist');
+            abort(404);
         }
 
         if (! $this->authorize($project, $version, $page)) {
-            return ' access';
-            abort(404, 'no access');
+            abort(404);
         }
 
         $content = $this->docs->get($project->name, $version, $page);
