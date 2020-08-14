@@ -107,7 +107,7 @@ class ProjectConfig extends CrudConfig
         $page->card(function ($form) {
             $form->relation('branches')->title('Branches')->preview(function ($preview) {
                 $preview->col('title')->value('{title}');
-                $preview->col('branch')->value('{branch}');
+                $preview->col('Name')->value('{name}');
                 $preview->col('active')->value('active', [
                     true  => Bootstrap::badge('active', 'success'),
                     false => Bootstrap::badge('hidden', 'secondary'),

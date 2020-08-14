@@ -44,7 +44,7 @@ class Project extends Model
 
     public function branches()
     {
-        return $this->hasMany(ProjectBranch::class);
+        return $this->hasMany(Branch::class);
     }
 
     public function access()

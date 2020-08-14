@@ -3,7 +3,7 @@
 namespace App\Actions;
 
 use App\Docs\Scraper;
-use App\Models\ProjectBranch;
+use App\Models\Branch;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 
@@ -37,8 +37,8 @@ class LoadProjectBranches
         $branches = $this->scraper->branches($model);
 
         foreach ($branches as $branch) {
-            ProjectBranch::firstOrCreate([
-                'branch'     => $branch['name'],
+            Branch::firstOrCreate([
+                'name'       => $branch['name'],
                 'project_id' => $model->id,
             ], [
                 'title' => ucfirst($branch['name']),
@@ -60,6 +60,6 @@ class LoadProjectBranches
     {
         $repo = $this->scraper->repo($model);
 
-        ProjectBranch::where('project_id', $model->id)->where('branch', $repo['default_branch'])->update(['default' => true]);
+        Branch::where('project_id', $model->id)->where('name', $repo['default_branch'])->update(['default' => true]);
     }
 }

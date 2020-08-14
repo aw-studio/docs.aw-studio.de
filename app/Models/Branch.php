@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectBranch extends Model
+class Branch extends Model
 {
     protected $fillable = [
-        'branch', 'title', 'active', 'project_id', 'default',
+        'name', 'title', 'active', 'project_id', 'default',
+    ];
+
+    protected $casts = [
+        'active' => 'boolean',
     ];
 
     protected function project()

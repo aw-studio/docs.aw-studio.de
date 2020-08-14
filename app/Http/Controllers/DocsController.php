@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UpdateProjectDocs;
 use App\Docs\Documentor;
 use App\Models\Project;
 use Illuminate\View\View;
@@ -28,6 +29,30 @@ class DocsController
     }
 
     /**
+     * Update project docs.
+     *
+     * @param  string            $vendor
+     * @param  string            $projectName
+     * @param  string            $secret
+     * @param  UpdateProjectDocs $action
+     * @return void
+     */
+    public function update($vendor, $projectName, $secret, UpdateProjectDocs $action)
+    {
+        if ($secret != env('GITHUB_CI_SECRET')) {
+            return;
+        }
+
+        $project = Project::where('name', "$vendor/$projectName")->first();
+
+        if (! $project) {
+            return;
+        }
+
+        $action->execute($project);
+    }
+
+    /**
      * Show documentation page.
      *
      * @param  string|null $page
@@ -47,7 +72,7 @@ class DocsController
         $project = Project::where('slug', $project)->firstOrFail();
 
         if (! $version) {
-            $version = $project->branches->where('default', true)->first()->branch;
+            $version = $project->branches->where('default', true)->first()->name;
         }
 
         if ($project->path) {

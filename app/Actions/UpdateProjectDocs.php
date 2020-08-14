@@ -4,7 +4,6 @@ namespace App\Actions;
 
 use App\Docs\Documentor;
 use App\Docs\Scraper;
-use App\Models\ProjectBranch;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -52,7 +51,7 @@ class UpdateProjectDocs
 
     protected function pullOrClone($branch)
     {
-        if ($this->docs->exists($branch->project->name, $branch->branch)) {
+        if ($this->docs->exists($branch->project->name, $branch->name)) {
             $this->pull($branch);
         } else {
             $this->clone($branch);
@@ -62,7 +61,7 @@ class UpdateProjectDocs
     /**
      * Pull project.
      *
-     * @param  ProjectBranch $branch
+     * @param  Branch $branch
      * @return void
      */
     protected function pull($branch)
@@ -75,7 +74,7 @@ class UpdateProjectDocs
     /**
      * Clone project.
      *
-     * @param  ProjectBranch $branch
+     * @param  Branch $branch
      * @return void
      */
     protected function clone($branch)
@@ -83,7 +82,7 @@ class UpdateProjectDocs
         $path = $this->getPath($branch);
 
         if (! $branch->project->path) {
-            exec("git clone -b {$branch->branch} {$branch->project->clone_url} {$path}", $output);
+            exec("git clone -b {$branch->name} {$branch->project->clone_url} {$path}", $output);
 
             return;
         }
@@ -95,20 +94,20 @@ class UpdateProjectDocs
             && git remote add -f origin '.$branch->project->clone_url.' \
             && git config core.sparseCheckout true \
             && echo "/'.$branch->project->path.'" >> .git/info/sparse-checkout \
-            && git checkout '.$branch->branch.' \
-            && git pull origin '.$branch->branch.'
+            && git checkout '.$branch->name.' \
+            && git pull origin '.$branch->name.'
         ');
     }
 
     /**
      * Get docs path.
      *
-     * @param  ProjectBranch $branch
+     * @param  Branch $branch
      * @return string
      */
     protected function getPath($branch)
     {
-        $path = "resources/docs/{$branch->project->name}/{$branch->branch}";
+        $path = "resources/docs/{$branch->project->name}/{$branch->name}";
 
         if (! app()->runningInConsole()) {
             $path = '../'.$path;
