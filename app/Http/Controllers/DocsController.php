@@ -84,10 +84,12 @@ class DocsController
         }
 
         if (! $this->docs->exists($project->name, $version, $page)) {
+            dd($project->name, $version, $page);
             abort(404);
         }
 
         if (! $this->authorize($project, $version, $page)) {
+            dd('nooe');
             abort(404);
         }
 
