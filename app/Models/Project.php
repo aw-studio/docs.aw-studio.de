@@ -15,7 +15,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'name', 'token', 'path'];
+    protected $fillable = ['title', 'name', 'token', 'path', 'private'];
 
     /**
      * Hidden attributes.
@@ -23,6 +23,10 @@ class Project extends Model
      * @var array
      */
     protected $hidden = ['token'];
+
+    protected $casts = [
+        'private' => 'boolean',
+    ];
 
     /**
      * Return the sluggable configuration array for this model.
