@@ -72,7 +72,11 @@ class DocsController
         $project = Project::where('slug', $project)->firstOrFail();
 
         if (! $version) {
-            $version = $project->branches->where('default', true)->first()->name;
+            if (! $branch = $project->branches->where('default', true)->first()) {
+                abort(404);
+            }
+
+            $version = $branch->name;
         }
 
         if ($project->path) {

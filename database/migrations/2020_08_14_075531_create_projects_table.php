@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->string('slug');
             $table->string('path');
             $table->string('token')->nullable();
-            $table->boolen('private')->default(false);
+            $table->boolean('private')->default(false);
             $table->timestamps();
         });
     }
