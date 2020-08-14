@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->string('slug');
-            $table->string('path');
+            $table->string('path')->nullable();
             $table->string('token')->nullable();
             $table->boolean('private')->default(false);
             $table->timestamps();
