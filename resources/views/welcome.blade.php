@@ -67,7 +67,6 @@
         <div class="flex-center position-ref full-height">
             <div class="top-right links">
                 @auth
-                    <a href="{{ url('/docs') }}">Docs</a>
                     <a href="{{ url('/logout') }}">Logout</a>
                 @else
                     <a href="/login/github">

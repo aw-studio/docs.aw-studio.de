@@ -39,17 +39,22 @@ class NavigationConfig extends Config
     /**
      * Main navigation entries.
      *
-     * @param \Fjord\Application\Navigation\Navigation $nav
-     *
+     * @param  \Fjord\Application\Navigation\Navigation $nav
      * @return void
      */
     public function main(Navigation $nav)
     {
         $nav->section([
-            $nav->title('Benutzer'),
+            $nav->title('Models'),
 
             $nav->preset('crud.user', [
                 'icon' => fa('users'),
+            ]),
+            $nav->preset('crud.project', [
+                'icon' => fa('book-open'),
+            ]),
+            $nav->preset('crud.access', [
+                'icon' => fa('key'),
             ]),
         ]);
     }

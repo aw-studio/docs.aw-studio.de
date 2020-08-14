@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Fjuse;
 use App\Docs\Documentor;
+use App\Models\Project;
 use Illuminate\View\View;
-use App\Http\Requests\DocsRequest;
 use Symfony\Component\DomCrawler\Crawler;
 
 class DocsController
@@ -35,7 +34,7 @@ class DocsController
      * @param  string|null $subPage
      * @return View
      */
-    public function show(DocsRequest $request, $page = null, $subPage = null)
+    public function show($project, $version, $page = null, $subPage = null)
     {
         if (! $page) {
             $page = DEFAULT_PAGE;
@@ -45,13 +44,57 @@ class DocsController
             $page .= "/{$subPage}";
         }
 
-        $content = $this->docs->get($page);
+        $project = Project::where('slug', $project)->firstOrFail();
+
+        if (! $version) {
+            $version = $project->branches->where('default', true)->first()->branch;
+        }
+
+        if (! $this->docs->exists($project->name, $version, $page)) {
+            abort(404);
+        }
+
+        if (! $this->authorize($project, $version, $page)) {
+            abort(404);
+        }
+
+        $content = $this->docs->get($project->name, $version, $page);
+
         $title = (new Crawler($content))->filterXPath('//h1');
 
+        $index = $this->docs->getIndex($project->name, $version);
+
         return view('docs.page', [
-            'index'          => $this->docs->getIndex('readme'),
-            'title'          => '$title',
-            'content'        => $content,
+            'index'   => $index,
+            'title'   => $title,
+            'content' => $content,
         ]);
+    }
+
+    /**
+     * Authorize documentation.
+     *
+     * @param  string $project
+     * @param  string $version
+     * @param  string $page
+     * @return bool
+     */
+    protected function authorize($project, $version, $page)
+    {
+        if (! auth()->user()) {
+            return false;
+        }
+
+        foreach ($project->access as $access) {
+            if (! $access->active) {
+                continue;
+            }
+
+            if ($access->username == auth()->user()->nickname) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

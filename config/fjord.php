@@ -62,11 +62,10 @@ return [
 
         'locale' => 'en',
 
-        'translatable' => true,
+        'translatable' => false,
 
         'locales' => [
             'en',
-            'de',
         ],
 
         'fallback_locale' => 'en',

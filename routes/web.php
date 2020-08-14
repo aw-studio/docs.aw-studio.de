@@ -1,11 +1,8 @@
 <?php
 
-use App\Fjuse;
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\LoginController;
-use App\Models\Repository;
-use App\Models\User;
-use App\Services\GitLab\GitLabApi;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 if (! defined('DEFAULT_PAGE')) {
@@ -14,12 +11,13 @@ if (! defined('DEFAULT_PAGE')) {
 
 Route::get('/', fn () => view('welcome'));
 
-// Docs
-
-Route::get('docs/{page?}/{sub_page?}', [DocsController::class, 'show'])->name('docs');
-
 // Auth
 
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('login/github', [LoginController::class, 'redirectToGithubProvider']);
 Route::get('login/github/callback', [LoginController::class, 'handleGithubProviderCallback']);
+
+// Docs
+if (! Request::is('admin*')) {
+    Route::get('/{project}/{version?}/{page?}/{sub_page?}', [DocsController::class, 'show'])->name('docs');
+}
