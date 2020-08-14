@@ -70,7 +70,6 @@ class UpdateProjectDocs
         $path = $this->getPath($branch);
 
         exec("cd {$path} && git pull", $output);
-        dd($output);
     }
 
     /**
