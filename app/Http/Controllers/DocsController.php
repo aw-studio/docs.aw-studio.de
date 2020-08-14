@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\UpdateProjectDocs;
 use App\Docs\Documentor;
 use App\Models\Project;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -84,6 +85,7 @@ class DocsController
         }
 
         if (! $this->docs->exists($project->name, $version, $page)) {
+            dd(File::directories(resource_path('docs/aw-studio')));
             dd($project->name, $version, $page);
             abort(404);
         }
