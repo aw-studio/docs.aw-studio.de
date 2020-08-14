@@ -85,7 +85,7 @@ class DocsController
         }
 
         if (! $this->docs->exists($project->name, $version, $page)) {
-            return 'dosent exist';
+            dd($project->name, $version, $page);
             abort(404, 'dosent exist');
         }
 
