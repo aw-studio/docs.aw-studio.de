@@ -85,7 +85,7 @@ class DocsController
         }
 
         if (! $this->docs->exists($project->name, $version, $page)) {
-            dd(File::directories(resource_path('docs/aw-studio/docs')));
+            dd(File::files(resource_path('docs/aw-studio/docs/master')));
             dd($project->name, $version, $page);
             abort(404);
         }
