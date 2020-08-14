@@ -50,6 +50,10 @@ class DocsController
             $version = $project->branches->where('default', true)->first()->branch;
         }
 
+        if ($project->path) {
+            $version .= "/{$project->path}";
+        }
+
         if (! $this->docs->exists($project->name, $version, $page)) {
             abort(404);
         }
@@ -81,6 +85,10 @@ class DocsController
      */
     protected function authorize($project, $version, $page)
     {
+        if (! $project->private) {
+            return true;
+        }
+
         if (! auth()->user()) {
             return false;
         }

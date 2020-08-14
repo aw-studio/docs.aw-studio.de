@@ -56,4 +56,15 @@ class Project extends Model
 
         return "https://{$this->token}@github.com/{$this->name}";
     }
+
+    public function getResourcePathAttribute()
+    {
+        $path = resource_path('docs/'.$this->name);
+
+        if (! $this->path) {
+            return $path;
+        }
+
+        return $path.'/'.$this->path;
+    }
 }

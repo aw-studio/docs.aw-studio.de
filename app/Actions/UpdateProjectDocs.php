@@ -7,6 +7,7 @@ use App\Docs\Scraper;
 use App\Models\ProjectBranch;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 
 class UpdateProjectDocs
 {
@@ -69,6 +70,7 @@ class UpdateProjectDocs
         $path = $this->getPath($branch);
 
         exec("cd {$path} && git pull", $output);
+        dd($output);
     }
 
     /**
@@ -81,7 +83,22 @@ class UpdateProjectDocs
     {
         $path = $this->getPath($branch);
 
-        exec("git clone -b {$branch->branch} {$branch->project->clone_url} {$path}", $output);
+        if (! $branch->project->path) {
+            exec("git clone -b {$branch->branch} {$branch->project->clone_url} {$path}", $output);
+
+            return;
+        }
+
+        File::ensureDirectoryExists($path);
+        exec('
+            cd '.$path.' \
+            && git init \
+            && git remote add -f origin '.$branch->project->clone_url.' \
+            && git config core.sparseCheckout true \
+            && echo "/'.$branch->project->path.'" >> .git/info/sparse-checkout \
+            && git checkout '.$branch->branch.' \
+            && git pull origin '.$branch->branch.'
+        ');
     }
 
     /**
@@ -93,6 +110,7 @@ class UpdateProjectDocs
     protected function getPath($branch)
     {
         $path = "resources/docs/{$branch->project->name}/{$branch->branch}";
+
         if (! app()->runningInConsole()) {
             $path = '../'.$path;
         }

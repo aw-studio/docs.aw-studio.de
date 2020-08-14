@@ -65,6 +65,10 @@ class ProjectConfig extends CrudConfig
         $page->table(function ($table) {
             $table->col('name')->value('{name}')->sortBy('name');
             $table->col('slug')->value('{slug}')->sortBy('slug');
+            $table->col('Access')->value('private', [
+                false => Bootstrap::badge('public', 'success'),
+                true  => Bootstrap::badge('private', 'info'),
+            ])->small();
         })
             ->sortByDefault('id.desc')
             ->search('title')
