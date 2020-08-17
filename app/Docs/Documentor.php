@@ -70,8 +70,14 @@ class Documentor
     public function getIndex($project, $version)
     {
         return $this->cache->remember("index.docs.{$project}.{$version}", 5, function () use ($project, $version) {
+            if (! $this->files->exists(
+                $path = $this->path($project, $version, 'readme')
+            )) {
+                return;
+            }
+
             $content = Str::after((new ParsedownExtra)->text(
-                $this->files->get($this->path($project, $version, 'readme'))
+                $this->files->get($path)
             ), '<h2>Index</h2>');
 
             preg_match_all('/(?<=\bhref=")[^"]*/', $content, $matches);

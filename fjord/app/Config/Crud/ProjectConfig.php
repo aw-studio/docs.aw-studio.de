@@ -96,7 +96,7 @@ class ProjectConfig extends CrudConfig
                     if (! $this->validateGithubUrl($value)) {
                         $fail('Must be a url to a github repository.');
                     }
-                });
+                })->creationRules('required');
             $form->input('title')->title('title')->width(6);
             $form->input('name')->title('Name')->width(6)->readonly();
             $form->input('token')->title('Token')->width(6);

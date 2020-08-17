@@ -54,6 +54,12 @@ class Scraper
         );
     }
 
+    /**
+     * Authorize repository.
+     *
+     * @param  Project $project
+     * @return void
+     */
     protected function authorize(Project $project)
     {
         if ($project->token) {

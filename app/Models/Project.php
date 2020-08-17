@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Docs\Git;
 use Fjord\Crud\Models\Traits\Sluggable;
 use Fjord\Crud\Models\Traits\TrackEdits;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Project extends Model
 {
@@ -15,7 +17,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'name', 'token', 'path', 'private'];
+    protected $fillable = ['title', 'name', 'token', 'path', 'private', 'slug'];
 
     /**
      * Hidden attributes.
@@ -70,5 +72,23 @@ class Project extends Model
         }
 
         return $path.'/'.$this->path;
+    }
+
+    /**
+     * Pull or clone repository.
+     *
+     * @param  string $branch
+     * @return void
+     */
+    public function pullOrClone($branch = 'master')
+    {
+        return app()->make(Git::class)->pullOrClone($this, $branch);
+    }
+
+    public function delete()
+    {
+        File::deleteDirectory(resource_path("docs/{$this->name}"));
+
+        return parent::delete();
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\UpdateProjectDocs;
 use App\Docs\Documentor;
 use App\Models\Project;
-use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -85,13 +84,10 @@ class DocsController
         }
 
         if (! $this->docs->exists($project->name, $version, $page)) {
-            dd(File::files(resource_path('docs/aw-studio/docs/master')));
-            dd($project->name, $version, $page);
             abort(404);
         }
 
         if (! $this->authorize($project, $version, $page)) {
-            dd('nooe');
             abort(404);
         }
 

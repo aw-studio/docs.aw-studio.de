@@ -2,7 +2,6 @@
 
 namespace FjordApp\Actions\Project;
 
-use App\Actions\UpdateProjectDocs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 
@@ -14,11 +13,15 @@ class UpdateProjectDocsAction
      * @param  Collection   $models
      * @return JsonResponse
      */
-    public function run(Collection $models, UpdateProjectDocs $action)
+    public function run(Collection $models)
     {
-        $action->execute($models->first());
+        $branches = $models->first()->branches()->where('active', true)->get();
 
-        $count = $models->first()->branches->count();
+        foreach ($branches as $branch) {
+            $models->first()->pullOrClone($branch->name);
+        }
+
+        $count = $branches->count();
 
         return response()->success("Updated [{$count}] versions.");
     }
