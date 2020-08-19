@@ -16,9 +16,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'service', 'avatar_url', 'payload', 'nickname',
-        'token', 'refresh_token', 'docs_access'
+        'token', 'refresh_token', 'docs_access',
     ];
 
+    /**
+     * Hidden attributes.
+     *
+     * @var array
+     */
     protected $hidden = [
         'token', 'refresh_token',
     ];
@@ -29,10 +34,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'payload' => 'json',
-        'docs_access' => 'boolean'
+        'payload'     => 'json',
+        'docs_access' => 'boolean',
     ];
 
+    /**
+     * Appended attributes.
+     *
+     * @var array
+     */
     protected $appends = ['profile_url'];
 
     /**
@@ -45,5 +55,19 @@ class User extends Authenticatable
         return [
             'github' => "https://www.github.com/{$this->nickname}",
         ][$this->service] ?? '';
+    }
+
+    /**
+     * Determines if the user has access to the give repository.
+     *
+     * @param  string $repo
+     * @return bool
+     */
+    public function hasAccessTo($repo)
+    {
+        return Access::where('active', true)
+            ->where('username', $this->nickname)
+            ->where('repo', $repo)
+            ->exists();
     }
 }

@@ -16,14 +16,9 @@ class Access extends Model
      *
      * @var array
      */
-    protected $fillable = ['username', 'project_id', 'active'];
+    protected $fillable = ['username', 'repo', 'active'];
 
     protected $casts = [
         'active' => 'boolean',
     ];
-
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
 }

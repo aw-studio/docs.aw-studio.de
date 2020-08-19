@@ -3,7 +3,6 @@
 namespace FjordApp\Config\Crud;
 
 use App\Models\Access;
-use App\Models\Project;
 use Fjord\Crud\Config\CrudConfig;
 use Fjord\Crud\CrudIndex;
 use Fjord\Crud\CrudShow;
@@ -62,9 +61,8 @@ class AccessConfig extends CrudConfig
 
         $page->table(function ($table) {
             $table->col('Nickname')->value('{username}')->sortBy('username');
-            $table->col('Project')->value('{project.name}')->sortBy('project.name');
+            $table->col('Repository')->value('{repo}')->sortBy('repo');
         })
-            ->query(fn ($query) => $query->with('project'))
             ->sortByDefault('id.desc')
             ->search('title')
             ->sortBy([
@@ -84,7 +82,7 @@ class AccessConfig extends CrudConfig
     {
         $page->card(function ($form) {
             $form->input('username')->title('Username')->width(6);
-            $form->select('project_id')->title('Project')->width(6)->options(Project::all()->mapWithKeys(fn ($project) => [$project->id => $project->name])->toArray());
+            $form->input('repo')->title('Repository')->width(6);
             $form->boolean('active')->title('Active')->width(6);
         });
     }

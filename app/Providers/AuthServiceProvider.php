@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use Docdress\Docdress;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,10 +22,12 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(GateContract $gate)
     {
-        $this->registerPolicies();
+        $this->registerPolicies($gate);
 
-        //
+        Docdress::gate('aw-studio/docs', function ($user) {
+            return $user->hasAccessTo('aw-studio/docs');
+        });
     }
 }

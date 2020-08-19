@@ -50,9 +50,6 @@ class NavigationConfig extends Config
             $nav->preset('crud.user', [
                 'icon' => fa('users'),
             ]),
-            $nav->preset('crud.project', [
-                'icon' => fa('book-open'),
-            ]),
             $nav->preset('crud.access', [
                 'icon' => fa('key'),
             ]),

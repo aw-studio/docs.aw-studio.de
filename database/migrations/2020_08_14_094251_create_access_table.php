@@ -15,7 +15,7 @@ class CreateAccessTable extends Migration
     {
         Schema::create('access', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('project_id');
+            $table->string('repo');
             $table->string('username');
             $table->boolean('active')->default(false);
             $table->timestamps();
