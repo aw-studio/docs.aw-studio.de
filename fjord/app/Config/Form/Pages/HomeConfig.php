@@ -46,12 +46,6 @@ class HomeConfig extends FormConfig
      */
     public function show(CrudShow $page)
     {
-        $page->card(function ($form) {
-            $form->input('title')
-                ->translatable()
-                ->title('Title');
-
-            $form->markdown(\Illuminate\Support\Facades\File::get(fjord_path('resources/docs/form-loader-example.md')));
-        });
+        $page->meta();
     }
 }

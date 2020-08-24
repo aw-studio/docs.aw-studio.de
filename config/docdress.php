@@ -4,7 +4,30 @@ return [
     'path' => resource_path('docs'),
 
     'repos' => [
+        'aw-studio/docdress' => [
+            'route_prefix'    => 'https://github.com/aw-studio/docdress#readme',
+            'title'           => 'Docdress',
+            'composer'        => 'aw-studio/docdress',
+            'description'     => 'Deploy markdown documentations',
+            'default_version' => 0,
+        ],
+        'cbl/blade-script' => [
+            'route_prefix'    => 'https://github.com/cbl/blade-script#readme',
+            'title'           => 'Blade Script',
+            'composer'        => 'cbl/blade-script',
+            'description'     => 'Transpile & minify scripts in Blade',
+            'default_version' => 0,
+        ],
+        'cbl/blade-style' => [
+            'route_prefix'    => 'https://github.com/cbl/blade-style#readme',
+            'title'           => 'Blade Style',
+            'composer'        => 'cbl/blade-style',
+            'description'     => 'Compile & minify styles in Blade',
+            'default_version' => 0,
+        ],
         'aw-studio/docs' => [
+            'title'           => 'AW-Studio Docs',
+            'description'     => 'Company Documentation',
             'route_prefix'    => 'docs',
             'subfolder'       => null,
             'default_page'    => 'workflow/development',

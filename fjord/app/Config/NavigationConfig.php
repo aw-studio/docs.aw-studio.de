@@ -45,14 +45,15 @@ class NavigationConfig extends Config
     public function main(Navigation $nav)
     {
         $nav->section([
+            $nav->title('Pages'),
+
+            $nav->preset('form.pages.home', ['icon' => fa('home')]),
+        ]);
+        $nav->section([
             $nav->title('Models'),
 
-            $nav->preset('crud.user', [
-                'icon' => fa('users'),
-            ]),
-            $nav->preset('crud.access', [
-                'icon' => fa('key'),
-            ]),
+            $nav->preset('crud.user', ['icon' => fa('users')]),
+            $nav->preset('crud.access', ['icon' => fa('key')]),
         ]);
     }
 }
