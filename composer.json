@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "aw-studio/docdress": "^0.0.4",
         "aw-studio/fjord": "^2.4",
         "cbl/blade-script": "^0.1.3",
         "cbl/blade-style": "^0.3.6",

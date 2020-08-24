@@ -9,6 +9,11 @@ class Access extends Model
 {
     use TrackEdits;
 
+    /**
+     * Databse table name.
+     *
+     * @var string
+     */
     public $table = 'access';
 
     /**
@@ -18,6 +23,11 @@ class Access extends Model
      */
     protected $fillable = ['username', 'repo', 'active'];
 
+    /**
+     * Casted attributes.
+     *
+     * @var array
+     */
     protected $casts = [
         'active' => 'boolean',
     ];

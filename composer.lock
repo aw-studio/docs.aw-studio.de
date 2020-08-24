@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1d29c552f014a094014eee1972e41e0",
+    "content-hash": "f7c9513dfb9e01b6854fe27ba063a151",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -146,6 +146,56 @@
                 }
             ],
             "time": "2020-07-08T17:21:18+00:00"
+        },
+        {
+            "name": "aw-studio/docdress",
+            "version": "v0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aw-studio/docdress.git",
+                "reference": "414dfbe7a745723fb4353717222c1ec151f44bef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aw-studio/docdress/zipball/414dfbe7a745723fb4353717222c1ec151f44bef",
+                "reference": "414dfbe7a745723fb4353717222c1ec151f44bef",
+                "shasum": ""
+            },
+            "require": {
+                "cbl/blade-script": "^0.1.3",
+                "cbl/blade-style": "^0.3.6",
+                "erusev/parsedown-extra": "^0.8.1",
+                "laravel/scout": "^8.2",
+                "symfony/browser-kit": "^5.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Docdress\\DocdressServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Docdress\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "cbl",
+                    "email": "lennart.carbe@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/aw-studio/docdress/issues",
+                "source": "https://github.com/aw-studio/docdress/tree/v0.0.4"
+            },
+            "time": "2020-08-19T14:41:49+00:00"
         },
         {
             "name": "aw-studio/fjord",
@@ -1919,6 +1969,76 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2020-08-11T13:43:10+00:00"
+        },
+        {
+            "name": "laravel/scout",
+            "version": "v8.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/scout.git",
+                "reference": "74e2d6a3859579dd7b246478d0bb62f13583d6c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/74e2d6a3859579dd7b246478d0bb62f13583d6c4",
+                "reference": "74e2d6a3859579dd7b246478d0bb62f13583d6c4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^6.0|^7.0",
+                "illuminate/contracts": "^6.0|^7.0",
+                "illuminate/database": "^6.0|^7.0",
+                "illuminate/http": "^6.0|^7.0",
+                "illuminate/pagination": "^6.0|^7.0",
+                "illuminate/queue": "^6.0|^7.0",
+                "illuminate/support": "^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "algolia/algoliasearch-client-php": "^2.2",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "suggest": {
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^2.2)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "8.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Scout\\ScoutServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Scout\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
+            "keywords": [
+                "algolia",
+                "laravel",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/scout/issues",
+                "source": "https://github.com/laravel/scout"
+            },
+            "time": "2020-08-06T11:13:20+00:00"
         },
         {
             "name": "laravel/socialite",
