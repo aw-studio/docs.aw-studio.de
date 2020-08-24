@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
 
@@ -32,7 +34,7 @@ class LoginController
 
         Auth::login($user);
 
-        return redirect('/docs');
+        return redirect('/');
     }
 
     /**
@@ -57,10 +59,15 @@ class LoginController
         ]);
     }
 
+    /**
+     * Do logout.
+     *
+     * @return RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();
-        
+
         return redirect('/');
     }
 }
