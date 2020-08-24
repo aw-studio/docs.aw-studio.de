@@ -33,6 +33,7 @@ return [
             'default_page'    => 'workflow/development',
             'default_version' => 'master',
             'access_token'    => env('GITHUB_ACCESS_TOKEN_AW_STUDIO', null),
+            'webhook_token'   => env('GITHUB_CI_SECRET', null),
             'versions'        => [
                 'master' => 'Master',
             ],
