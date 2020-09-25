@@ -11,6 +11,13 @@ return [
             'description'     => 'Deploy markdown documentations',
             'default_version' => 0,
         ],
+        'aw-studio/laravel-migrations-merger' => [
+            'route_prefix'    => 'https://github.com/aw-studio/laravel-migrations-merger#readme',
+            'title'           => 'Laravel Migrations Merger',
+            'composer'        => 'aw-studio/laravel-migrations-merger',
+            'description'     => 'Merge laravel migrations',
+            'default_version' => 0,
+        ],
         'cbl/blade-script' => [
             'route_prefix'    => 'https://github.com/cbl/blade-script#readme',
             'title'           => 'Blade Script',
