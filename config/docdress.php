@@ -4,6 +4,13 @@ return [
     'path' => resource_path('docs'),
 
     'repos' => [
+        'litstack/litstack' => [
+            'route_prefix'    => 'https://litstack.io/docs',
+            'title'           => 'Litstack',
+            'composer'        => 'litstack/litstack',
+            'description'     => 'Laravel Admin-Panel framework',
+            'default_version' => 0,
+        ],
         'aw-studio/docdress' => [
             'route_prefix'    => 'https://github.com/aw-studio/docdress#readme',
             'title'           => 'Docdress',
