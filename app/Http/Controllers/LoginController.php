@@ -50,7 +50,7 @@ class LoginController
             'nickname' => $user->nickname,
             'service'  => $service,
         ], [
-            'name'          => $user->name,
+            'name'          => $user->name ?: '',
             'email'         => $user->email,
             'avatar_url'    => $user->avatar,
             'payload'       => $user->user,
